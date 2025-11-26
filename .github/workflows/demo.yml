@@ -15,7 +15,10 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v3
       - name: create file 
-        run: touch github-action.txt
+        run: |
+           touch github-action.txt
+           ls -la
+           echo Hello world
       - name: print hello world
         run: echo Hello world
       - name: display readme file
@@ -23,13 +26,15 @@ jobs:
   build_job:
     needs: 
     - setup_job
-    - deploy_job
+
     runs-on: windows-latest
     steps:
       - name: display hello
         run: echo hello 
+      - name: display readme file
+        run: cat github-actions.txt 
   deploy_job:
-    needs: setup_job
+    needs: build_job
     runs-on: macos-latest
     steps:
       - run: echo hellow mac
