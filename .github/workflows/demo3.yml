@@ -19,6 +19,7 @@ jobs:
 
   build_job:
     runs-on: windows-latest
+    needs: [setup_job]
     steps:
      - name: checkout code
        uses: actions/checkout@v4
@@ -27,6 +28,7 @@ jobs:
     
   deploy_job: 
     runs-on: macos-latest
+    needs: [build_job]
     steps:
      - name: checkout code
        uses: actions/checkout@v4   
