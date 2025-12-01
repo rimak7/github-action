@@ -1,0 +1,28 @@
+name: demo pipeline
+
+on:
+    push:
+        branches:
+            - main
+            - dev
+    pull_request:
+        branches: [main, dev]
+              
+    schedule:
+     - cron:  "*/5 * * * *"
+jobs:
+  setup_job:
+    runs-on: ubuntu-latest  #macos-latest , windows-latest
+    steps:
+     - name: code checkout
+       uses: actions/checkout
+
+  build_job:
+    runs-on: windows-latest
+    steps:
+     - name: display hello
+       run: echo hello  
+    
+  deploy_job: 
+    runs-on: macos-latest
+    steps:
